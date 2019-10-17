@@ -29,10 +29,10 @@
 <audio controls><source src="./audio/MusicMonoton.wav" type="audio/wav"></audio>
 <p>Linke Aufnahme: VoiceMonton.wav; rechte Aufnahme: MusicMonoton.wav</p>
 <br><h3>Aufgabe b)</h3>
-<p>Bei der Aufnahme der Musik, haben wir uns für eine Abtastfrequenz von 44.100Hz entschieden.<br>
-    Es gilt zu beachten, dass unser Hörbereich bis 20.000Hz geht.<br>
-    Theoretisch benötigt man nur die doppelte Abtastfrequenz, also 44kHz. Um zu vermeiden, dass immer bei Samples mit Amplitudenwert 0 abgetastet wird (Grenzfall), wählt man eine Abtastfrequenz, leicht höher, wie das Doppelte vom  abzutastenden Hz-Bereich.<br>
-    Leider ist uns ein Fehler beim Einstellen der Abtastfrequenz unterlaufen, weshalb unsere Beispieldatei nur eine Abtastrate von 44.000Hz verwendet.</p>
+<p>Bei der Aufnahme der Musik ist eine Abtastfrequenz von 44100Hz vorhanden.<br>
+    Hörbereich bis 20000Hz Theoretisch benötigt man nur die doppelte Abtastfrequenz, also 44kHz.<br>
+     Um zu vermeiden, dass immer bei den Samples mit Amplitudenwert 0 abgetastet wird (Grenzfall), wählt man eine Abtastfrequenz, leicht höher, wie das Doppelte vom  abzutastenden Hz-Bereich.<br>
+     </p>
 <br>
 <br><h3>Aufgabe c)</h3>
 <p>Erklaerung der Headerausgabe - Bsp. Musikdatei</p>
@@ -40,7 +40,7 @@
 <br>"Frames: 500358" - Absolute Anzahl von Frames
 <br>"Sample Rate: 44000" - Samples pro Sekunde
 <br>"Valid Bits: 16" - Bitanzahl bei der Aufloesung
-<br>"Bytes per Sample: 2" - 8 Bit sind 1 Byte. Wir haben 16 Valid Bits, also 2*8 Bits, also 2*1 Byte.
+<br>"Bytes per Sample: 2" - 8 Bit sind 1 Byte. 16 Valid Bits, also 2*8 Bits, also 2*1 Byte.
 <br>
 <br><h3>Aufgabe d)</h3>
 <p>Bitrate berechnen</p>
@@ -430,8 +430,8 @@
 </p>
 <h4>Antwort: </h4>
 <p>
-    Bei einer Reduktion um 1 Bit ist das Rauschen sehr ausgeprägt. Je stärker die Reduktion ist, destoschwächer wird das Rauschen (im Differenzsignal). <br>
-    Der Fehler bzw. das Rauschen scheint sich jedoch nicht linear zu ändern, sonder potenziell, da erst bei sehr hoher Reduktionsrate, eine annähernde Ursprungsqualität erreicht wird.
+    Bei einer Reduktion um 1 Bit ist das Rauschen sehr ausgeprägt. Je stärker die Reduktion ist, desto schwächer wird das Rauschen im Differenzsignal. <br>
+    Das Rauschen scheint sich jedoch nicht linear zu ändern, sonder potenziell, da erst bei sehr hoher Reduktionsrate, eine annähernde Ursprungsqualität erreicht wird.
 </p>
 </body>
 </html>
