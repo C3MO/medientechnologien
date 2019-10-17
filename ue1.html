@@ -1,5 +1,6 @@
 <html>
 <head>
+      <meta charset="utf-8" />
 <title></title>
 <link rel="stylesheet" type="text/css" href="format.css">
 <style type="text/css">
@@ -18,31 +19,419 @@
          folgenden.</p>
 </iframe>
 
-<h2>&Uuml;bung 1</h2>
-<br><h3>Aufgabe 1 - 1.1</h3>
+<!-- Beginn Aufgabe 1 ----------------------------------------------------------------------------------------------- -->
 
+<br><h2>Aufgabe 1 - Audiodateien erzeugen und einlesen</h2>
+<hr color="#444444" size="2">
 <br><p>Musikaufnahme</p>
-<audio controls><source src="./audio/musik_mono.wav" type="audio/wav"></audio>
-<p>Beschreibung</p>
-<p>L&ouml;sung</p>
+<br><h3>Aufgabe a)</h3>
+<audio controls><source src="./audio/VoiceMonoton.wav" type="audio/wav"></audio>
+<audio controls><source src="./audio/MusicMonoton.wav" type="audio/wav"></audio>
+<p>Linke Aufnahme: VoiceMonton.wav; rechte Aufnahme: MusicMonoton.wav</p>
+<br><h3>Aufgabe b)</h3>
+<p>Bei der Aufnahme der Musik, haben wir uns für eine Abtastfrequenz von 44.100Hz entschieden.<br>
+    Es gilt zu beachten, dass unser Hörbereich bis 20.000Hz geht.<br>
+    Theoretisch benötigt man nur die doppelte Abtastfrequenz, also 44kHz. Um zu vermeiden, dass immer bei Samples mit Amplitudenwert 0 abgetastet wird (Grenzfall), wählt man eine Abtastfrequenz, leicht höher, wie das Doppelte vom  abzutastenden Hz-Bereich.<br>
+    Leider ist uns ein Fehler beim Einstellen der Abtastfrequenz unterlaufen, weshalb unsere Beispieldatei nur eine Abtastrate von 44.000Hz verwendet.</p>
+<br>
+<br><h3>Aufgabe c)</h3>
+<p>Erklaerung der Headerausgabe - Bsp. Musikdatei</p>
+<br>"Channels: 1" - 1 Channel Mono | 2 Channel Sterio (Unterscheidung Links/Rechts)
+<br>"Frames: 500358" - Absolute Anzahl von Frames
+<br>"Sample Rate: 44000" - Samples pro Sekunde
+<br>"Valid Bits: 16" - Bitanzahl bei der Aufloesung
+<br>"Bytes per Sample: 2" - 8 Bit sind 1 Byte. Wir haben 16 Valid Bits, also 2*8 Bits, also 2*1 Byte.
+<br>
+<br><h3>Aufgabe d)</h3>
+<p>Bitrate berechnen</p>
+<br>   I.
+<br>      fa = 44.000/sec
+<br>      N = 16 bit/sample
+<br>      K = 1
+<br>      Formel: fa * N * K
+<br>      PCM = 704.000 bit/sec
+<br>
+<br>   II.
+<br>      fa = 22.000/sec
+<br>      N = 16 bit/sample
+<br>      K = 1
+<br>      PCM = 352.000 bit/sec
+<br>
 
-<br><h3>Aufgabe 1 - 1.2</h3>
-<p>L&ouml;sung</p>
 
-<br><h3>Aufgabe 2 - 2.1</h3>
-<br><p>Rauschen</p>
-<audio controls><source src="./audio/rauschen.wav" type="audio/wav"></audio>
-<p>Beschreibung</p>
-<p>L&ouml;sung</p>
+<!-- Beginn Aufgabe 2 ----------------------------------------------------------------------------------------------- -->
+<br><h2>Aufgabe 2 - Aliasing</h2>
+<hr color="#444444" size="2">
+<br><h3>Aufgabe 2a</h3>
+<h4>Aufgabe:</h4>
+<p class="QnA">
+    Modifiziere wave_io dahingehend, dass die Samples in der WAV-Datei in eine
+    (lesbare) ASCII-Datei geschrieben werden. Lies die von mir geschickten
+    Sinusdateien (Sampling-Frequenz: 16 kHz) ein und bestimme aus den
+    resultierenden Zahlenfolgen in der ASCII-Datei die Frequenz der Sinusschwingungen. Begründe!
+</p>
+<p>
+    Folgender Code wurde zur Erstellung der ASCII Datei verwendet: <br><br>
+</p>
+<section class="code">
+    <code>
+        <div class="code1"> BufferedWriter out = new BufferedWriter(new FileWriter("Ascii-" + args[0].replace(".wav", "") + ".txt"));</div>
+        <div class="code1"> for (int i=0; i < samples;i++) {</div>
+        <div class="code2">short curSound = readWavFile.sound[i];</div>
+        <div class="code2">out.write(Short.toString(curSound));</div>
+        <div class="code2">out.newLine();</div>
+        <div class="code2">}</div>
+        <div class="code1">out.close();</div>
+    </code>
+</section>
+<br>
+<br>
+<h4>Berechnung und Erläuterung:</h4>
+<p>
+    Um die Frequenz der Sinusschwingungen zu errechnen, wollen wir zunächst herausfinden wie viele Schwingungen (Übergang des Wertes von negativ zu positiv) in einer sich wiederholenden Periode stecken.
+    Wir sehen uns dazu den Wert des ersten Samples der jeweiligen WAV-Datei bzw. ASCII-Datei an und zählen ab, wie viele Intervalle, also Übergänge
+    von einem Sample zum nächsten, gelistet sind, bis der Wert des ersten Samples wieder auftaucht. Dazu muss mindestens einmal ein Wertwechsel vom Negativen
+    ins Positive stattgefunden haben, da wir sonst keine ganze Schwingung des Sinustons berückstichtigen würden. Nun betrachten wir die Häufigkeit der Schwingungen und
+    setzen die ermittelten Werte in folgende Formel:
+    <br>
+    <br>f = fa/V, wobei
+    <br>V = Anzahl gezählter Intervalle/Anzahl gezählter Schwingungen.
+    <br>
+    <br>In der folgenden Tabelle ist zu sehen, welche Werte wir jeweils ermittelt haben:
+</p>
+<br>
+<table>
+    <tr>
+        <th> </th>
+        <th>sine_lo06.wav</th>
+        <th>sine_hi06.wav</th>
+    </tr>
+    <tr>
+        <td>Anz. Intervalle</td>
+        <td>32</td>
+        <td>15</td>
+    </tr>
+    <tr>
+        <td>Anz. Schwingungen</td>
+        <td>1</td>
+        <td>7</td>
+    </tr>
+    <tr>
+        <td>Frequenz</td>
+        <td>0.5 kHz</td>
+        <td>7.466 kHz</td>
+    </tr>
+</table>
+<br>
+<br><h3>Aufgabe 2b</h3>
+<h4>Aufgabe:</h4>
+<p class="QnA">
+    Überprüfe deine Schätzung mit dem Spektralanalyse-Tool GRAM.
+    (Vorgehensweise: Menüpunkt Analyze File, Einstellungen: Freq
+    Scale: Linear, FFT Size: 512, Time scale: 1 msec)
+</p>
+<p>Lösung:
+    <br>Unten stehende Screenshots zeigen, dass unsere Berechnungen tatsächlich den Frequenzen der Töne entspricht. Die gelbe Linie zeigt an, auf welcher
+    Frequenz der Ton jeweils liegt (links: Screenshot sine_lo06, rechts: sine_hi06).
+</p>
+<img src="./pics/sin_lo_frequenz.PNG" width="616" height="438" alt="gram sine_lo06">
+<img src="./pics/sin_hi_frequenz.PNG" width="616" height="438" alt="gram sine_lo06">
 
-<br><h3>Aufgabe 2 - 2.2</h3>
-<p>L&ouml;sung</p>
+<br><h3>Aufgabe 2c</h3>
+<h4>Aufgabe:</h4>
+<p class="QnA">
+    Bei der zeitlichen Diskretisierung eines Analogsignals muss das sogenannte Abtasttheorem eingehalten werden. Wie lautet es und wie lässt sich
+    der Grenzfall, für den es gerade noch gilt, illustrieren? Erstelle hierzu eine Zeichnung und erläutere.
+</p>
+<img src="./pics/Zeichnung_Abtasttheorem 2c.PNG" width="454" height="287" alt="Zeichnung 2c">
+<p>Lösung:
+    <br>Formel für das Abtasttheorem:
+    <br>fa > 2 * f0
+    <br>f0 = fa/2
+    <br>Bei jeder Schwingung des dargestellten Audiosignals müssen mindestens 2 Abtastungen mit genügend Abstand vorgenommen werden, um die Frequenz
+    des Audiosignals korrekt wiedergeben zu können. Unter Umständen könnte es passieren, dass man genau die Nullpunkte des
+    Audiosignals abtastet. Um dem entgegenzuwirken, ist es deshalb ratsam, die Abtastfrequenz geringfügig höher zu wählen.
+</p>
+<br><h3>Aufgabe 2d</h3>
+<h4>Aufgabe:</h4>
+<p class ="QnA">
+    Bei herkömmlichen Soundkarten tritt systembedingt kein Aliasing auf, weil das Audiosignal stets geeignet vorbehandelt wird. Wie sieht diese
+    Vorbehandlung aus?
+</p>
+<p>Antwort:
+    <br> In herkömmlichen Soundkarten sind zumeist sogenannte Tiefpassfilter eingebaut, die zu hohe Frequenzen
+    filtern. Dadurch entstehen keine fehlerhaft abgetasteten Frequenzen in der Aufnahme (Aliasing).
+</p>
+<br><h3>Aufgabe 2e</h3>
+<h4>Aufgabe:</h4>
+ <p class="QnA">
+    [...] Modifiziere wave_io dahingehend, dass vom eingelesenen Audiosignal jeder zweite Abtastwert verworfen wird und das resultierende Signal abgespeichert
+    wird. Der Header muss natürlich entsprechend verändert werden!
+</p>
+<p>
+    Folgender Code ist die entsprechende Methode: <br><br>
+</p>
+<section class="code">
+    <code>
+        <div class="code1">numChannels = numChannels;</div>
+        <div class="code1">samples = samples/2;</div>
+        <div class="code1">validBits= validBits;</div>
+        <div class="code1">sampleRate = sampleRate / 2;</div>
+        <div class="code1">numFrames = numFrames / 2;</div>
+        <br><div class="code1">for (int i=0; i < samples;i++) {</div>
+        <div class="code2">readWavFile.sound[i] = </div>
+        <div class="code2">readWavFile.sound[i*2];</div>
+        <div class="code1">}</div>
+    </code>
+</section>
 
-<br><h3>Aufgabe 2 - 2.3</h3>
-<p>L&ouml;sung</p>
+ <br><h3>Aufgabe 2f</h3>
+<h4>Aufgabe:</h4>
+ <p class="QnA">
+   Wende das erstellte Programm auf die von mir geschickten Sinusdateien an (sine_hiXX.wav und sine_loXX.wav) an. Welche Frequenzen erscheinen nach dem Down-Sampling?
+   Was würde passieren, wenn man geeignet bandbegrenzen würde?
+</p>
+<p>
+   sine_hi06 ohne Downsampling:
+</p>
+   <audio controls>
+       <source src="./audio/sine_hi06.wav" type="audio/wav">
+   </audio>
+<p>
+   sine_hi06 mit Downsampling:
+</p>
+   <audio controls>
+       <source src="./audio/sine_hi06_Downsample.wav" type="audio/wav">
+   </audio>
+<p>Wie man hören kann, ist der entstandene Ton viel tiefer als der ursprüngliche
+   Ton von sine_hi06. Folgender Screenshot zeigt, dass die Frequenz des gedownsampelten
+   Signals bei ~0.5kHz liegt.
+</p>
+<img src="./pics/sine_hi06_downsample_gram.PNG" width="616" height="438" alt="gram sine_lo06">
+<p>Dies kommt daher, dass unter Berücksichtigung des Abtasttheorems alle Frequenzen über 8kHz (bei der gegebenen Abtastrate von 16kHz) bei der Aufnahme des Ursprungsignals nicht
+   mehr berücksichtigt wurden. Nach dem Downsampling hat sich diese Abtastrate nochmal halbiert, d.h. wir haben eine neue Abtastrate von 8kHz und folgern daraus, dass alle
+   Frequenzen über 4kHz Alias-Effekte aufweisen.
+   <br>Würde man bandbegrenzen, würde man entsprechend keinen Ton mehr hören.
+   <br>Auch auf die Datei sine-lo06.wav haben wir ein Downsampling durchgeführt. Da das Signal aber eine niedrigere Frequenz hat, als die gedownsampelte Abtastfrequenz
+   bleibt der entstehende Ton unverändert (ebenso die Frequenz).
+</p>
+<br>
 
-<br><h3>Aufgabe 3 - 3.1</h3>
-<p>L&ouml;sung</p>
 
+<!-- Beginn Aufgabe 3 ----------------------------------------------------------------------------------------------- -->
+<br><h2>Aufgabe 3 - Bitreduzierung</h2>
+<hr color="#444444" size="2">
+
+<br><h3>Aufgabe 3a)</h3>
+<h4>Frage: </h4>
+<p class="QnA">
+    Die herkömmlichen PC-Soundkarten arbeiten meist entweder mit 16 oder 8 bit-Auflösung. Wie
+    groß ist die Anzahl bei diesen beiden Werten darstellbaren Amplitudenwerten?
+</p>
+
+<h4>Antwort: </h4>
+<p>
+    Die Anzahl möglicher Amplitudenwerte ergibt sich aus der Anzahl verschiedener Binärzahlen, die sich mit
+    der eingesetzten Bit-Menge produzieren lassen. In der Regel betragen diese 2^n, wobie n für die Anzahl der
+    Bits steht. Somit gilt:
+</p>
+<ol>
+    <li>Für 8 Bit: 2^8 -> 256 verschiedene Amplitudenwerte</li>
+    <li>Für 16 Bit: 2^16 -> 65.536 verschiedene Amplitudenwerte</li>
+</ol>
+
+
+<h3>Aufgabe 3b)</h3>
+<h4>Frage: </h4>
+<p class="QnA">
+    Modifiziere wave_io dahingehend, dass die Bitanzahl reduzieren wird.
+</p>
+
+<h4>Antwort: </h4>
+<section class="code">
+    <div class="code1">int reduced_bits = 10;</div>
+    <div class="code1">for (int i=0; i < samples;i++) {</div>
+    <div class="code2">readWavFile.sound[i] = (short) ((int) (readWavFile.sound[i] / Math.pow(2, reduced_bits)) * Math.pow(2, reduced_bits));</div>
+    <div class="code1">}</div>
+</section>
+
+<h3>Aufgabe 3c)</h3>
+<h4>Frage: </h4>
+<p class="QnA">
+    Mit dem entstandenen Programm sollen nun die in Aufgabe 1 erzeugten Wave-Dateien (Sprache
+    und Musik) bitreduziert werden. Ab welcher Bitanzahl tritt eine hörbare, also deutliche
+    Verschlechterung der Qualität ein? Bei wie viel Bit ist das Sprachsignal noch verständlich?
+</p>
+<h4>Antwort: </h4>
+<h4>Sprachaufnahme</h4>
+<table>
+    <tr>
+        <td><audio controls><source src="./audio/VoiceMonoton.wav" type="audio/wav"></audio>
+            <p>Originalaufnahme leider mit leichter Übersteuerung, welche an manchen Stellen zu kleineren Störungen führt.</p><br></td>
+        <td><audio controls><source src="./audio/VoiceMonoton_out_BitReduktion_8.wav" type="audio/wav"></audio>
+            <p>Aufnahme mit 8 Bit Reduktion.</p><br></td>
+        <td><audio controls><source src="./audio/VoiceMonoton_out_BitReduktion_12.wav" type="audio/wav"></audio>
+            <p>Aufnahme mit 12 Bit Reduktion.</p><br></td>
+    </tr>
+</table>
+<br><br>
+<a href="./pics/VoiceMonoton_BitReduktion.PNG"><img width="800" src="./pics/VoiceMonoton_BitReduktion.PNG" alt="Bild kann nicht angezeigt werden"></a>
+<br><br>
+<ol>
+    <li>Die obige Grafik zeigt die Bitreduktion der monoton Sprachaufnahme im Originalzustand (links),
+        der Aufnahme mit 8 Bit Reduktion (Mitte, 8 Bit verbleibend) und der Aufnahme mit 12 Bit Reduktion (4 Bit verbleibend)</li>
+    <li>Wie in der Grafik zu sehen ist, sind die Unterschiede zwischen der Orginalaufnahme und der 8 Bit reduzierten Aufnahme maginal.
+        Trotzdem ist schon ein wahrnehmbares Rauschen zu hören. Große unterschiede sind jedoch auf der 12 Bit reduzierten Aufnahme zu erkennen. </li>
+    <li>Bei dieser ist die Stimme kaum noch zu verstehen. Auch im Spektrogramm ist dies deutlich zu erkennen, da die entweder sehr starke Ausschläge auftreten,
+        oder im Orginal vorhandene Frequenzen jetzt nicht mehr vorliegen.
+    </li>
+</ol>
+<br><br>
+<h4>Musikaufnahme</h4>
+<table>
+    <tr>
+        <td><audio controls><source src="./audio/MusicMonoton.wav" type="audio/wav"></audio><p>Originalaufnahme ohne Bitreduktion.</p><br></td>
+        <td><audio controls><source src="./audio/MusicMonoton_out_BitReduktion_12.wav" type="audio/wav"></audio><p>Aufnahme mit 12 Bit Reduktion.</p><br></td>
+    </tr>
+</table>
+<br><br>
+<a href="./pics/MusikMonoton_BitReduktion.PNG"><img width="800" src="./pics/MusikMonoton_BitReduktion.PNG" alt="Bild kann nicht angezeigt werden"></a>
+<br><br>
+<ol>
+    <li>Die obige Grafik zeigt die Bitreduktion der Musikaufnahme im Originalzustand (links),
+        und der Aufnahme mit 12 Bit Reduktion (4 Bit verbleibend)</li>
+    <li>Im Gegensatz zur Sprachaufnahme, ist selbst bei 12 Bit Reduktion (also 4 Bit verbleibend) die Musik deutlich zu hören, auch wenn eine sehr starke Störung wahrnehmbar ist. </li>
+    <li>Die Unterschiede hinsichtlich der Auswirkungen der Bitreduktion auf Musik und Sprache werden damit Begründet, dass bei der Musik eine durchgehende Geräuschkulisse geschaffen
+        wird und somit ein dichteres Spektrum hinsichtlich Frequenz und Lautstärke erreicht wird. Der durch die Bitreduktion entstehende Fehler wird somit zwar hörbar, aber es stehen
+        noch genug Informationen zur Verfügung. Aufgrund der starken Schwankungen bei der Sprache und der fehlenden Durchgängigkeit wirkt sich ein auftretender Fehler somit stärker aus.
+    </li>
+</ol>
+
+<h3>Aufgabe 3d)</h3>
+<h4>Frage: </h4>
+<p class="QnA">
+    Was charakterisiert das entstehende Quantisierungsgeräusch bei der Bitreduzierung und macht es besonders störend?
+</p>
+<h4>Antwort: </h4>
+<p>
+    Besonders störend ist das Rauschen, welches entsteht. Es wirkt zunächst im Hintergrund und verlagert sich "gefühlt" mit zunehmender Reduktion immer weiter in den Vordergrund,
+    bis zuletzte die Musik / Sprache kaum bis gar nicht mehr zu verstehen ist.
+</p>
+
+<h3>Aufgabe 3e)</h3>
+<h4>Frage: </h4>
+<p class="QnA">
+    Modifiziere dein Programm noch einmal so, dass auch das Differenzsignal zwischen Original und
+    bitreduziertem Signal, d.h. der Quantisierungsfehler ausgegeben werden kann.
+</p>
+<h4>Quellcode: </h4>
+<section class="code">
+    <div class="code1">for (int i=0; i < samples;i++) {</div>
+    <div class="code2">
+        short oldSound = readWavFile.sound[i];<br>
+        short newSound = (short) ((int) (readWavFile.sound[i] / Math.pow(2, reduced_bits)) * Math.pow(2, reduced_bits));<br>
+        short factor = (short) Math.pow(2, 16-reduced_bits-1);<br>
+        readWavFile.sound[i] = (short)((oldSound-newSound)*factor);<br>
+    </div>
+    <div class="code1">}</div>
+</section>
+<br><br>
+<table border>
+    <tr>
+        <td>
+            <b>Dateibeschreibung</b>
+        </td>
+        <td>
+            <b>Datei</b>
+        </td>
+        <td>
+            <b>Erläuterung</b>
+        </td>
+        <td>
+            <b>Spektrogramm GRAM</b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Differenzsignal mit 1 Bit (1 Bit Reduktion) für die Sprachaufnahme
+        </td>
+        <td>
+            <audio controls>
+                <source src="./audio/VoiceMonoton_out_Rauschen_1.wav" type="audio/wav">
+                Your browser does not support the <code>audio</code> tag.
+            </audio>
+        </td>
+        <td>
+            Sehr starkes Rauschen, welches dazu führt, dass die Stimme kaum zu verstehen ist.
+        </td>
+        <td>
+            <a href="./pics/VoiceMonoton_1Bit_Rauschen.PNG"><img width="100" src="./pics/VoiceMonoton_1Bit_Rauschen.PNG" alt="Bild kann nicht angezeigt werden"></a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Differenzsignal mit 8 Bit für die Sprachaufnahme.
+        </td>
+        <td>
+            <audio controls>
+                <source src="./audio/VoiceMonoton_out_Rauschen_8.wav" type="audio/wav">
+                Your browser does not support the <code>audio</code> tag.
+            </audio>
+        </td>
+        <td>
+            Starkes Rauschen im Vergleich zur reduzierten Orginalaufnahme. Die Stimme ist schwer zu verstehen. Geringfügige Verbesserung gegenüber des Differenzsignals der 1 Bit Reduzierung,
+            welches auch durch die Sepktrogramme bestätigt wird.
+        </td>
+        <td>
+            <a href="./pics/VoiceMonoton_8Bit_Rauschen.PNG"><img width="100" src="./pics/VoiceMonoton_8Bit_Rauschen.PNG" alt="Bild kann nicht angezeigt werden"></a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Differenzssignal für Musikaufnahme mit 1 Bit reduziert.
+        </td>
+        <td>
+            <audio controls>
+                <source src="./audio/MusicMonoton_out_Rauschen_1.wav" type="audio/wav">
+                Your browser does not support the <code>audio</code> tag.
+            </audio>
+        </td>
+        <td>
+            Auch hier sehr ausgeprägtes Rauschen.
+        </td>
+        <td>
+            <a href="./pics/MusicMonoton_1Bit_Rauschen.PNG"><img width="100" src="./pics/MusicMonoton_1Bit_Rauschen.PNG" alt="Bild kann nicht angezeigt werden"></a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Differenzssignal für Musikaufnahme mit 12 Bit reduziert.
+        </td>
+        <td>
+            <audio controls>
+                <source src="./audio/MusicMonoton_out_Rauschen_12.wav" type="audio/wav">
+                Your browser does not support the <code>audio</code> tag.
+            </audio>
+        </td>
+        <td>
+            Gleiche Beobachtung wie bei der Sprachaufnahme, jedoch ist die Musik etwas besser herauszuhören.
+        </td>
+        <td>
+            <a href="./pics/MusicMonoton_12Bit_Rauschen.PNG"><img width="100" src="./pics/MusicMonoton_12Bit_Rauschen.PNG" alt="Bild kann nicht angezeigt werden"></a>
+        </td>
+    </tr>
+</table>
+<br>
+
+<h3>Aufgabe 3f)</h3>
+<h4>Frage: </h4>
+<p class="QnA">
+    Welchen Charakter hat das Rauschen bei einer Reduktion um 1bit und wie verändert es sich bei zunehmender Bit-Reduktion?
+</p>
+<h4>Antwort: </h4>
+<p>
+    Bei einer Reduktion um 1 Bit ist das Rauschen sehr ausgeprägt. Je stärker die Reduktion ist, destoschwächer wird das Rauschen (im Differenzsignal). <br>
+    Der Fehler bzw. das Rauschen scheint sich jedoch nicht linear zu ändern, sonder potenziell, da erst bei sehr hoher Reduktionsrate, eine annähernde Ursprungsqualität erreicht wird.
+</p>
 </body>
 </html>
