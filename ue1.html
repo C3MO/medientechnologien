@@ -142,7 +142,7 @@
     Bei der zeitlichen Diskretisierung eines Analogsignals muss das sogenannte Abtasttheorem eingehalten werden. Wie lautet es und wie lässt sich
     der Grenzfall, für den es gerade noch gilt, illustrieren? Erstelle hierzu eine Zeichnung und erläutere.
 </p>
-<img src="./pics/Zeichnung_Abtasttheorem 2c.PNG" width="454" height="287" alt="Zeichnung 2c">
+<img src="./pics/Abstastpunkte_Zeichnung.png" width="454" height="287" alt="Zeichnung 2c">
 <p>Lösung:
     <br>Formel für das Abtasttheorem:
     <br>fa > 2 * f0
@@ -206,7 +206,7 @@
    Ton von sine_hi06. Folgender Screenshot zeigt, dass die Frequenz des gedownsampelten
    Signals bei ~0.5kHz liegt.
 </p>
-<img src="./pics/sine_hi06_downsample_gram.PNG" width="616" height="438" alt="gram sine_lo06">
+<img src="./pics/Downsampling.png" width="616" height="438" alt="gram sine_lo06">
 <p>Dies kommt daher, dass unter Berücksichtigung des Abtasttheorems alle Frequenzen über 8kHz (bei der gegebenen Abtastrate von 16kHz) bei der Aufnahme des Ursprungsignals nicht
    mehr berücksichtigt wurden. Nach dem Downsampling hat sich diese Abtastrate nochmal halbiert, d.h. wir haben eine neue Abtastrate von 8kHz und folgern daraus, dass alle
    Frequenzen über 4kHz Alias-Effekte aufweisen.
@@ -247,11 +247,11 @@
 </p>
 
 <h4>Antwort: </h4>
-<section class="code">
-    <div class="code1">int reduced_bits = 10;</div>
-    <div class="code1">for (int i=0; i < samples;i++) {</div>
-    <div class="code2">readWavFile.sound[i] = (short) ((int) (readWavFile.sound[i] / Math.pow(2, reduced_bits)) * Math.pow(2, reduced_bits));</div>
-    <div class="code1">}</div>
+<section>
+    <p>int reduced_bits = 10;</p>
+    <p>for (int i=0; i < samples;i++) { </p>
+    <p>readWavFile.sound[i] = (short) ((int) (readWavFile.sound[i] / Math.pow(2, reduced_bits)) * Math.pow(2, reduced_bits));</p>
+    <p>}</p>
 </section>
 
 <h3>Aufgabe 3c)</h3>
@@ -274,7 +274,7 @@
     </tr>
 </table>
 <br><br>
-<a href="./pics/VoiceMonoton_BitReduktion.PNG"><img width="800" src="./pics/VoiceMonoton_BitReduktion.PNG" alt="Bild kann nicht angezeigt werden"></a>
+<a href="./pics/BitReduktion1.png"><img width="800" src="./pics/BitReduktion1.png" alt="Bild kann nicht angezeigt werden"></a>
 <br><br>
 <ol>
     <li>Die obige Grafik zeigt die Bitreduktion der monoton Sprachaufnahme im Originalzustand (links),
@@ -294,7 +294,7 @@
     </tr>
 </table>
 <br><br>
-<a href="./pics/MusikMonoton_BitReduktion.PNG"><img width="800" src="./pics/MusikMonoton_BitReduktion.PNG" alt="Bild kann nicht angezeigt werden"></a>
+<a href="./pics/BitReduktion2.png"><img width="800" src="./pics/BitReduktion2.png" alt="Bild kann nicht angezeigt werden"></a>
 <br><br>
 <ol>
     <li>Die obige Grafik zeigt die Bitreduktion der Musikaufnahme im Originalzustand (links),
