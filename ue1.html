@@ -76,10 +76,10 @@
     <code>
         <div class="code1"> BufferedWriter out = new BufferedWriter(new FileWriter("Ascii-" + args[0].replace(".wav", "") + ".txt"));</div>
         <div class="code1"> for (int i=0; i < samples;i++) {</div>
-        <div class="code2">short curSound = readWavFile.sound[i];</div>
-        <div class="code2">out.write(Short.toString(curSound));</div>
-        <div class="code2">out.newLine();</div>
-        <div class="code2">}</div>
+        <div class="code1">short curSound = readWavFile.sound[i];</div>
+        <div class="code1">out.write(Short.toString(curSound));</div>
+        <div class="code1">out.newLine();</div>
+        <div class="code1">}</div>
         <div class="code1">out.close();</div>
     </code>
 </section>
@@ -170,18 +170,18 @@
 <p>
     Folgender Code ist die entsprechende Methode: <br><br>
 </p>
-<section>
-        <p>numChannels = numChannels;</p>
-        <p>samples = samples/2;</p>
-        <p>validBits= validBits;</p>
-        <p>sampleRate = sampleRate / 2;</p>
-        <p>numFrames = numFrames / 2;</p>
-        <br><p>for (int i=0; i < samples;i++) {</p>
-        <p>readWavFile.sound[i] = </p>
-        <p>readWavFile.sound[i*2];</p>
-        <p>}</p>
-</section>
-
+<section class = "code">
+        <div class="code1">numChannels = numChannels;</div>
+        <div class="code1">samples = samples/2;</div>
+        <div class="code1">validBits= validBits;</div>
+        <div class="code1">sampleRate = sampleRate / 2;</div>
+        <div class="code1">numFrames = numFrames / 2;</div>
+        <br><div class="code1">for (int i=0; i < samples;i++) {</div>
+        <div class="code1">readWavFile.sound[i] = </div>
+        <div class="code1">readWavFile.sound[i*2];</div>
+        <div class="code1">}</div>
+        </code>
+    </section>
  <br><h3>Aufgabe 2f</h3>
 <h4>Aufgabe:</h4>
  <p class="QnA">
