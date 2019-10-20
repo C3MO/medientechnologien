@@ -142,7 +142,7 @@
     Bei der zeitlichen Diskretisierung eines Analogsignals muss das sogenannte Abtasttheorem eingehalten werden. Wie lautet es und wie lässt sich
     der Grenzfall, für den es gerade noch gilt, illustrieren? Erstelle hierzu eine Zeichnung und erläutere.
 </p>
-<img src="./pics/Abstastpunkte_Zeichnung.png" width="454" height="287" alt="Zeichnung 2c">
+<img src="./pics/Abtastpunkte_Zeichnung.png" width="454" height="287" alt="Zeichnung">
 <p>Lösung:
     <br>Formel für das Abtasttheorem:
     <br>fa > 2 * f0
@@ -170,18 +170,16 @@
 <p>
     Folgender Code ist die entsprechende Methode: <br><br>
 </p>
-<section class="code">
-    <code>
-        <div class="code1">numChannels = numChannels;</div>
-        <div class="code1">samples = samples/2;</div>
-        <div class="code1">validBits= validBits;</div>
-        <div class="code1">sampleRate = sampleRate / 2;</div>
-        <div class="code1">numFrames = numFrames / 2;</div>
-        <br><div class="code1">for (int i=0; i < samples;i++) {</div>
-        <div class="code2">readWavFile.sound[i] = </div>
-        <div class="code2">readWavFile.sound[i*2];</div>
-        <div class="code1">}</div>
-    </code>
+<section>
+        <p>numChannels = numChannels;</p>
+        <p>samples = samples/2;</p>
+        <p>validBits= validBits;</p>
+        <p>sampleRate = sampleRate / 2;</p>
+        <p>numFrames = numFrames / 2;</p>
+        <br><p>for (int i=0; i < samples;i++) {</p>
+        <p>readWavFile.sound[i] = </p>
+        <p>readWavFile.sound[i*2];</p>
+        <p>}</p>
 </section>
 
  <br><h3>Aufgabe 2f</h3>
@@ -234,10 +232,10 @@
     der eingesetzten Bit-Menge produzieren lassen. In der Regel betragen diese 2^n, wobie n für die Anzahl der
     Bits steht. Somit gilt:
 </p>
-<ol>
-    <li>Für 8 Bit: 2^8 -> 256 verschiedene Amplitudenwerte</li>
-    <li>Für 16 Bit: 2^16 -> 65.536 verschiedene Amplitudenwerte</li>
-</ol>
+<section>
+    <p>Für 8 Bit: 2^8 -> 256 verschiedene Amplitudenwerte</p>
+    <p>Für 16 Bit: 2^16 -> 65.536 verschiedene Amplitudenwerte</p>
+</section>
 
 
 <h3>Aufgabe 3b)</h3>
@@ -296,7 +294,7 @@
 <br><br>
 <a href="./pics/BitReduktion2.png"><img width="800" src="./pics/BitReduktion2.png" alt="Bild kann nicht angezeigt werden"></a>
 <br><br>
-    <p>Die obige Grafik zeigt die Bitreduktion der Musikaufnahme im Originalzustand (links),
+<p>Die obige Grafik zeigt die Bitreduktion der Musikaufnahme im Originalzustand (links),
         und der Aufnahme mit 12 Bit Reduktion (4 Bit verbleibend)
     Im Gegensatz zur Sprachaufnahme, ist selbst bei 12 Bit Reduktion (also 4 Bit verbleibend) die Musik deutlich zu hören, auch wenn eine sehr starke Störung wahrnehmbar ist.
     Die Unterschiede hinsichtlich der Auswirkungen der Bitreduktion auf Musik und Sprache werden damit Begründet, dass bei der Musik eine durchgehende Geräuschkulisse geschaffen
@@ -379,7 +377,7 @@
             welches auch durch die Sepktrogramme bestätigt wird.
         </td>
         <td>
-            <a href="./pics/Bit8_Rauschen2.PNG"><img width="100" src="./pics/Bit8_Rauschen2.PNG" alt="Bild kann nicht angezeigt werden"></a>
+            <a href="./pics/Bit8_Rauschen1.png"><img width="100" src="./pics/Bit8_Rauschen1.png" alt="Bild kann nicht angezeigt werden"></a>
         </td>
     </tr>
     <tr>
@@ -396,7 +394,7 @@
             Auch hier sehr ausgeprägtes Rauschen.
         </td>
         <td>
-            <a href="./pics/Music_1Bit_Rauschen1.png"><img width="100" src="./pics/Music_1Bit_Rauschen1.PNG" alt="Bild kann nicht angezeigt werden"></a>
+            <a href="./pics/Music_1Bit_Rauschen1.png"><img width="100" src="./pics/Music_1Bit_Rauschen1.png" alt="Bild kann nicht angezeigt werden"></a>
         </td>
     </tr>
     <tr>
@@ -413,7 +411,7 @@
             Gleiche Beobachtung wie bei der Sprachaufnahme, jedoch ist die Musik etwas besser herauszuhören.
         </td>
         <td>
-            <a href="./pics/Music_12Bit_Rauschen1.PNG"><img width="100" src="./pics/Music_12Bit_Rauschen1.PNG" alt="Bild kann nicht angezeigt werden"></a>
+            <a href="./pics/Music_12Bit_Rauschen1.png"><img width="100" src="./pics/Music_12Bit_Rauschen1.png" alt="Bild kann nicht angezeigt werden"></a>
         </td>
     </tr>
 </table>
