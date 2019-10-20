@@ -25,9 +25,8 @@
 <hr color="#444444" size="2">
 <br><p>Musikaufnahme</p>
 <br><h3>Aufgabe a)</h3>
-<audio controls><source src="./audio/VoiceMonoton.wav" type="audio/wav"></audio>
-<audio controls><source src="./audio/MusicMonoton.wav" type="audio/wav"></audio>
-<p>Linke Aufnahme: VoiceMonton.wav; rechte Aufnahme: MusicMonoton.wav</p>
+<audio controls><source src="./audio/Sprache.wav" type="audio/wav"></audio>
+<audio controls><source src="./audio/Musik.wav" type="audio/wav"></audio>
 <br><h3>Aufgabe b)</h3>
 <p>Bei der Aufnahme der Musik ist eine Abtastfrequenz von 44100Hz vorhanden.<br>
     Hörbereich bis 20000Hz Theoretisch benötigt man nur die doppelte Abtastfrequenz, also 44kHz.<br>
@@ -43,7 +42,7 @@
 <br>"Bytes per Sample: 2" - 8 Bit sind 1 Byte. 16 Valid Bits, also 2*8 Bits, also 2*1 Byte.
 <br>
 <br><h3>Aufgabe d)</h3>
-<p>Bitrate berechnen</p>
+<p>Berechnung der Bitrate</p>
 <br>   I.
 <br>      fa = 44.000/sec
 <br>      N = 16 bit/sample
@@ -71,7 +70,7 @@
     resultierenden Zahlenfolgen in der ASCII-Datei die Frequenz der Sinusschwingungen. Begründe!
 </p>
 <p>
-    Folgender Code wurde zur Erstellung der ASCII Datei verwendet: <br><br>
+    Code zur Erstellung der ASCII Datei: <br><br>
 </p>
 <section class="code">
     <code>
@@ -266,11 +265,11 @@
 <h4>Sprachaufnahme</h4>
 <table>
     <tr>
-        <td><audio controls><source src="./audio/VoiceMonoton.wav" type="audio/wav"></audio>
-            <p>Originalaufnahme leider mit leichter Übersteuerung, welche an manchen Stellen zu kleineren Störungen führt.</p><br></td>
-        <td><audio controls><source src="./audio/VoiceMonoton_out_BitReduktion_8.wav" type="audio/wav"></audio>
-            <p>Aufnahme mit 8 Bit Reduktion.</p><br></td>
-        <td><audio controls><source src="./audio/VoiceMonoton_out_BitReduktion_12.wav" type="audio/wav"></audio>
+        <td><audio controls><source src="./audio/Sprache.wav" type="audio/wav"></audio>
+            <p>Originalaufnahme.</p><br></td>
+        <td><audio controls><source src="./audio/Sprache_10bit.wav" type="audio/wav"></audio>
+            <p>Aufnahme mit 10 Bit Reduktion.</p><br></td>
+        <td><audio controls><source src="./audio/Sprache_12bit.wav" type="audio/wav"></audio>
             <p>Aufnahme mit 12 Bit Reduktion.</p><br></td>
     </tr>
 </table>
@@ -290,8 +289,8 @@
 <h4>Musikaufnahme</h4>
 <table>
     <tr>
-        <td><audio controls><source src="./audio/MusicMonoton.wav" type="audio/wav"></audio><p>Originalaufnahme ohne Bitreduktion.</p><br></td>
-        <td><audio controls><source src="./audio/MusicMonoton_out_BitReduktion_12.wav" type="audio/wav"></audio><p>Aufnahme mit 12 Bit Reduktion.</p><br></td>
+        <td><audio controls><source src="./audio/Musik.wav" type="audio/wav"></audio><p>Originalaufnahme ohne Bitreduktion.</p><br></td>
+        <td><audio controls><source src="./audio/Musik_12bit.wav" type="audio/wav"></audio><p>Aufnahme mit 12 Bit Reduktion.</p><br></td>
     </tr>
 </table>
 <br><br>
@@ -357,7 +356,7 @@
         </td>
         <td>
             <audio controls>
-                <source src="./audio/VoiceMonoton_out_Rauschen_1.wav" type="audio/wav">
+                <source src="./audio/Sprache_diff.wav" type="audio/wav">
                 Your browser does not support the <code>audio</code> tag.
             </audio>
         </td>
@@ -370,11 +369,11 @@
     </tr>
     <tr>
         <td>
-            Differenzsignal mit 8 Bit für die Sprachaufnahme.
+            Differenzsignal mit 10 Bit für die Sprachaufnahme.
         </td>
         <td>
             <audio controls>
-                <source src="./audio/VoiceMonoton_out_Rauschen_8.wav" type="audio/wav">
+                <source src="./audio/Sprache_diff10.wav" type="audio/wav">
                 Your browser does not support the <code>audio</code> tag.
             </audio>
         </td>
@@ -392,7 +391,7 @@
         </td>
         <td>
             <audio controls>
-                <source src="./audio/MusicMonoton_out_Rauschen_1.wav" type="audio/wav">
+                <source src="./audio/Musik_diff.wav" type="audio/wav">
                 Your browser does not support the <code>audio</code> tag.
             </audio>
         </td>
@@ -409,7 +408,7 @@
         </td>
         <td>
             <audio controls>
-                <source src="./audio/MusicMonoton_out_Rauschen_12.wav" type="audio/wav">
+                <source src="./audio/Musik_diff12.wav" type="audio/wav">
                 Your browser does not support the <code>audio</code> tag.
             </audio>
         </td>
@@ -431,7 +430,7 @@
 <h4>Antwort: </h4>
 <p>
     Bei einer Reduktion um 1 Bit ist das Rauschen sehr ausgeprägt. Je stärker die Reduktion ist, desto schwächer wird das Rauschen im Differenzsignal. <br>
-    Das Rauschen scheint sich jedoch nicht linear zu ändern, sonder potenziell, da erst bei sehr hoher Reduktionsrate, eine annähernde Ursprungsqualität erreicht wird.
+    Das Rauschen scheint sich jedoch nicht linear zu ändern, sondern potenziell, da erst bei sehr hoher Reduktionsrate, eine annähernde Ursprungsqualität erreicht wird.
 </p>
 </body>
 </html>
