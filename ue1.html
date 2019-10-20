@@ -223,7 +223,7 @@
 
 <br><h3>Aufgabe 3a)</h3>
 <h4>Frage: </h4>
-<p class="QnA">
+<p>
     Die herkömmlichen PC-Soundkarten arbeiten meist entweder mit 16 oder 8 bit-Auflösung. Wie
     groß ist die Anzahl bei diesen beiden Werten darstellbaren Amplitudenwerten?
 </p>
@@ -256,7 +256,7 @@
 
 <h3>Aufgabe 3c)</h3>
 <h4>Frage: </h4>
-<p class="QnA">
+<p>
     Mit dem entstandenen Programm sollen nun die in Aufgabe 1 erzeugten Wave-Dateien (Sprache
     und Musik) bitreduziert werden. Ab welcher Bitanzahl tritt eine hörbare, also deutliche
     Verschlechterung der Qualität ein? Bei wie viel Bit ist das Sprachsignal noch verständlich?
@@ -276,7 +276,7 @@
 <br><br>
 <a href="./pics/BitReduktion1.png"><img width="800" src="./pics/BitReduktion1.png" alt="Bild kann nicht angezeigt werden"></a>
 <br><br>
-<ol>
+<p>
     <li>Die obige Grafik zeigt die Bitreduktion der monoton Sprachaufnahme im Originalzustand (links),
         der Aufnahme mit 8 Bit Reduktion (Mitte, 8 Bit verbleibend) und der Aufnahme mit 12 Bit Reduktion (4 Bit verbleibend)</li>
     <li>Wie in der Grafik zu sehen ist, sind die Unterschiede zwischen der Orginalaufnahme und der 8 Bit reduzierten Aufnahme maginal.
@@ -284,7 +284,7 @@
     <li>Bei dieser ist die Stimme kaum noch zu verstehen. Auch im Spektrogramm ist dies deutlich zu erkennen, da die entweder sehr starke Ausschläge auftreten,
         oder im Orginal vorhandene Frequenzen jetzt nicht mehr vorliegen.
     </li>
-</ol>
+</p>
 <br><br>
 <h4>Musikaufnahme</h4>
 <table>
@@ -324,15 +324,14 @@
     bitreduziertem Signal, d.h. der Quantisierungsfehler ausgegeben werden kann.
 </p>
 <h4>Quellcode: </h4>
-<section class="code">
-    <div class="code1">for (int i=0; i < samples;i++) {</div>
-    <div class="code2">
+<section>
+    <p>for (int i=0; i < samples;i++) {
         short oldSound = readWavFile.sound[i];<br>
         short newSound = (short) ((int) (readWavFile.sound[i] / Math.pow(2, reduced_bits)) * Math.pow(2, reduced_bits));<br>
         short factor = (short) Math.pow(2, 16-reduced_bits-1);<br>
         readWavFile.sound[i] = (short)((oldSound-newSound)*factor);<br>
-    </div>
-    <div class="code1">}</div>
+      }
+    </p>
 </section>
 <br><br>
 <table border>
@@ -364,7 +363,7 @@
             Sehr starkes Rauschen, welches dazu führt, dass die Stimme kaum zu verstehen ist.
         </td>
         <td>
-            <a href="./pics/VoiceMonoton_1Bit_Rauschen.PNG"><img width="100" src="./pics/VoiceMonoton_1Bit_Rauschen.PNG" alt="Bild kann nicht angezeigt werden"></a>
+            <a href="./pics/Bit1_Rauschen1.png"><img width="100" src="./pics/Bit1_Rauschen1.png" alt="Bild kann nicht angezeigt werden"></a>
         </td>
     </tr>
     <tr>
@@ -382,7 +381,7 @@
             welches auch durch die Sepktrogramme bestätigt wird.
         </td>
         <td>
-            <a href="./pics/VoiceMonoton_8Bit_Rauschen.PNG"><img width="100" src="./pics/VoiceMonoton_8Bit_Rauschen.PNG" alt="Bild kann nicht angezeigt werden"></a>
+            <a href="./pics/Bit8_Rauschen2.PNG"><img width="100" src="./pics/Bit8_Rauschen2.PNG" alt="Bild kann nicht angezeigt werden"></a>
         </td>
     </tr>
     <tr>
@@ -399,7 +398,7 @@
             Auch hier sehr ausgeprägtes Rauschen.
         </td>
         <td>
-            <a href="./pics/MusicMonoton_1Bit_Rauschen.PNG"><img width="100" src="./pics/MusicMonoton_1Bit_Rauschen.PNG" alt="Bild kann nicht angezeigt werden"></a>
+            <a href="./pics/Music_1Bit_Rauschen1.png"><img width="100" src="./pics/Music_1Bit_Rauschen1.PNG" alt="Bild kann nicht angezeigt werden"></a>
         </td>
     </tr>
     <tr>
@@ -416,7 +415,7 @@
             Gleiche Beobachtung wie bei der Sprachaufnahme, jedoch ist die Musik etwas besser herauszuhören.
         </td>
         <td>
-            <a href="./pics/MusicMonoton_12Bit_Rauschen.PNG"><img width="100" src="./pics/MusicMonoton_12Bit_Rauschen.PNG" alt="Bild kann nicht angezeigt werden"></a>
+            <a href="./pics/Music_12Bit_Rauschen1.PNG"><img width="100" src="./pics/Music_12Bit_Rauschen1.PNG" alt="Bild kann nicht angezeigt werden"></a>
         </td>
     </tr>
 </table>
